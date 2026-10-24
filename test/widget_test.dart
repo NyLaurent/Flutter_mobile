@@ -7,6 +7,6 @@ void main() {
     await tester.pumpWidget(const MyApp());
 
     expect(find.text('Welcome to my page'), findsOneWidget);
-    expect(find.text('My Page'), findsOneWidget);
+    expect(find.text('MY PAGE'), findsOneWidget);
   });
 }
