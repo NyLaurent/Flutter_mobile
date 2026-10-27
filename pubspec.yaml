@@ -61,6 +61,55 @@ flutter:
   assets:
     - assets/images/
 
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/font/Montserrat-Thin.ttf
+          weight: 100
+        - asset: assets/font/Montserrat-ThinItalic.ttf
+          weight: 100
+          style: italic
+        - asset: assets/font/Montserrat-ExtraLight.ttf
+          weight: 200
+        - asset: assets/font/Montserrat-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/font/Montserrat-Light.ttf
+          weight: 300
+        - asset: assets/font/Montserrat-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/font/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/font/Montserrat-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/font/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/font/Montserrat-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/font/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/font/Montserrat-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/font/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/font/Montserrat-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/font/Montserrat-ExtraBold.ttf
+          weight: 800
+        - asset: assets/font/Montserrat-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/font/Montserrat-Black.ttf
+          weight: 900
+        - asset: assets/font/Montserrat-BlackItalic.ttf
+          weight: 900
+          style: italic
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
