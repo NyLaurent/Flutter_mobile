@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+class AppColors {
+  static const primary = Color(0xFF4E3A25);
+  static const background = Color(0xFFF5F0E6);
+  static const button = Color(0xFFC4A675);
+  static const success = Color(0xFF2E7D32);
+  static const failure = Color(0xFFC62828);
+}
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,8 +21,27 @@ class MyApp extends StatelessWidget {
       title: 'Welcome',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4D8DFF)),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          primary: AppColors.primary,
+          secondary: AppColors.button,
+          surface: AppColors.background,
+          error: AppColors.failure,
+        ),
         fontFamily: 'Montserrat',
+        scaffoldBackgroundColor: AppColors.background,
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            backgroundColor: AppColors.button,
+            foregroundColor: AppColors.primary,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.button,
+            foregroundColor: AppColors.primary,
+          ),
+        ),
         useMaterial3: true,
       ),
       home: const WelcomePage(),
@@ -37,9 +64,9 @@ class WelcomePage extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color(0xFF10295C),
-                  Color(0xFF1356A5),
-                  Color(0xFF168BD2),
+                  Color(0xFFFFFCF6),
+                  AppColors.background,
+                  Color(0xFFEDE2CF),
                 ],
               ),
             ),
@@ -47,12 +74,12 @@ class WelcomePage extends StatelessWidget {
           const Positioned(
             top: -90,
             right: -70,
-            child: _GlowCircle(size: 250, opacity: 0.12),
+            child: _GlowCircle(size: 250, opacity: 0.07),
           ),
           const Positioned(
             bottom: 90,
             left: -110,
-            child: _GlowCircle(size: 230, opacity: 0.10),
+            child: _GlowCircle(size: 230, opacity: 0.06),
           ),
           SafeArea(
             child: Padding(
@@ -65,15 +92,15 @@ class WelcomePage extends StatelessWidget {
                         width: 42,
                         height: 42,
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.14),
+                          color: AppColors.button.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(14),
                           border: Border.all(
-                            color: Colors.white.withOpacity(0.22),
+                            color: AppColors.primary.withOpacity(0.12),
                           ),
                         ),
                         child: const Icon(
                           Icons.auto_awesome_rounded,
-                          color: Colors.white,
+                          color: AppColors.primary,
                           size: 22,
                         ),
                       ),
@@ -81,7 +108,7 @@ class WelcomePage extends StatelessWidget {
                       const Text(
                         'MY PAGE',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.primary,
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 2.2,
@@ -94,15 +121,15 @@ class WelcomePage extends StatelessWidget {
                     width: 112,
                     height: 112,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.13),
+                      color: AppColors.button.withOpacity(0.18),
                       borderRadius: BorderRadius.circular(34),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.28),
+                        color: AppColors.button.withOpacity(0.6),
                         width: 1.5,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF061A3B).withOpacity(0.22),
+                          color: AppColors.primary.withOpacity(0.14),
                           blurRadius: 32,
                           offset: const Offset(0, 16),
                         ),
@@ -110,7 +137,7 @@ class WelcomePage extends StatelessWidget {
                     ),
                     child: const Icon(
                       Icons.waving_hand_rounded,
-                      color: Color(0xFFFFD36E),
+                      color: AppColors.primary,
                       size: 54,
                     ),
                   ),
@@ -121,16 +148,16 @@ class WelcomePage extends StatelessWidget {
                       vertical: 8,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.12),
+                      color: AppColors.button.withOpacity(0.18),
                       borderRadius: BorderRadius.circular(30),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.18),
+                        color: AppColors.button.withOpacity(0.4),
                       ),
                     ),
                     child: const Text(
                       'A PLACE FOR YOUR IDEAS',
                       style: TextStyle(
-                        color: Color(0xFFB9DBFF),
+                        color: AppColors.primary,
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 2,
@@ -142,7 +169,7 @@ class WelcomePage extends StatelessWidget {
                     'Welcome Laurent',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.primary,
                       fontSize: 36,
                       height: 1.14,
                       fontWeight: FontWeight.w800,
@@ -154,7 +181,7 @@ class WelcomePage extends StatelessWidget {
                     'A fresh space to explore, create, and make yourself at home.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.76),
+                      color: AppColors.primary.withOpacity(0.72),
                       fontSize: 16,
                       height: 1.55,
                     ),
@@ -167,17 +194,17 @@ class WelcomePage extends StatelessWidget {
                       vertical: 16,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.12),
+                      color: AppColors.button.withOpacity(0.28),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.18),
+                        color: AppColors.button.withOpacity(0.55),
                       ),
                     ),
                     child: const Row(
                       children: [
                         Icon(
                           Icons.stars_rounded,
-                          color: Color(0xFFFFD36E),
+                          color: AppColors.primary,
                           size: 25,
                         ),
                         SizedBox(width: 13),
@@ -185,7 +212,7 @@ class WelcomePage extends StatelessWidget {
                           child: Text(
                             'Your next great idea starts here.',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.primary,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
@@ -217,7 +244,7 @@ class _GlowCircle extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.white.withOpacity(opacity),
+        color: AppColors.button.withOpacity(opacity),
       ),
     );
   }
