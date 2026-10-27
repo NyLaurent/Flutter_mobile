@@ -127,7 +127,7 @@ class WelcomePage extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      'A PLACE FOR YOU',
+                      'A PLACE FOR YOUR IDEAS',
                       style: TextStyle(
                         color: Color(0xFFB9DBFF),
                         fontSize: 11,
@@ -138,7 +138,7 @@ class WelcomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 22),
                   const Text(
-                    'Welcome to my page',
+                    'Welcome Laurent',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
