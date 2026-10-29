@@ -1,27 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_mobile/main.dart';
+import 'package:flutter_mobile/app.dart';
 
 void main() {
+  testWidgets('fades in the logo and automatically opens onboarding', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MyApp());
+
+    expect(find.byType(Image), findsOneWidget);
+    expect(find.text('Scan QR to see menu instantly'), findsNothing);
+
+    await tester.pump(const Duration(milliseconds: 900));
+    expect(find.byType(FadeTransition), findsOneWidget);
+
+    await tester.pump(const Duration(milliseconds: 1100));
+    await tester.pumpAndSettle();
+    expect(find.text('Scan QR to see menu instantly'), findsOneWidget);
+  });
+
   testWidgets('continues through all onboarding pages', (
     WidgetTester tester,
   ) async {
     await tester.pumpWidget(const MyApp());
 
     expect(find.byType(Image), findsOneWidget);
-    expect(find.text('Continue'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
+    expect(find.text('Scan QR to see menu instantly'), findsOneWidget);
     expect(
-      Theme.of(tester.element(find.text('Continue')))
+      Theme.of(tester.element(find.text('Next')))
           .textTheme
           .bodyMedium
           ?.fontFamily,
       'Montserrat',
     );
 
-    await tester.tap(find.text('Continue'));
-    await tester.pumpAndSettle();
-    expect(find.text('Scan QR to see menu instantly'), findsOneWidget);
     expect(find.text('Prev'), findsOneWidget);
     expect(find.text('Next'), findsOneWidget);
 
