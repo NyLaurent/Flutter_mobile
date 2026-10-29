@@ -1,0 +1,12 @@
+{
+  "cmake.sourceDirectory": "D:/Flutter_mobile/flutter_mobile/linux",
+  "task.allowAutomaticTasks": true,
+  "debug.openDebug": "neverOpen",
+  "terminal.integrated.inheritEnv": false,
+  "tasks": {
+    "label": "lint on open",
+    "type": "shell",
+    "command": "npm run lint",
+    "runOn": "folderOpen"
+  }
+}

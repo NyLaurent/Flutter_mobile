@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_mobile/app.dart';
@@ -70,7 +71,34 @@ void main() {
     await tester.tap(find.text('Login'));
     await tester.pumpAndSettle();
     expect(find.text('Welcome back'), findsOneWidget);
+    expect(find.byType(SvgPicture), findsOneWidget);
+    expect(find.text('E-mail address'), findsOneWidget);
 
+    await tester.tap(find.text('Login with phone number'));
+    await tester.pumpAndSettle();
+    expect(find.text('Phone number'), findsOneWidget);
+    await tester.tap(find.text('Login with email'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Forgot password?'));
+    await tester.pumpAndSettle();
+    expect(find.text('Choose where you would like to receive your reset code'),
+        findsOneWidget);
+    await tester.tap(find.text('Phone number').first);
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextFormField).last, '5551234567');
+    await tester.tap(find.text('Send OTP'));
+    await tester.pumpAndSettle();
+    expect(find.text('Enter the OTP'), findsOneWidget);
+    await tester.enterText(find.byType(TextFormField).first, '123456');
+    await tester.tap(find.text('Verify OTP'));
+    await tester.pumpAndSettle();
+    expect(find.text('Reset Password'), findsOneWidget);
+
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Create account'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Create account'));
     await tester.pumpAndSettle();
     expect(find.text('Create an account'), findsOneWidget);

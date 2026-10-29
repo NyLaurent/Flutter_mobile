@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../theme/app_colors.dart';
 
@@ -12,11 +13,15 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _usePhone = false;
+  bool _obscurePassword = true;
 
   @override
   void dispose() {
     _emailController.dispose();
+    _phoneController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -47,6 +52,16 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 8),
+                Center(
+                  child: SvgPicture.asset(
+                    'assets/images/auth_logo.svg',
+                    height: 130,
+                    fit: BoxFit.contain,
+                    semanticsLabel: 'The YOT logo',
+                  ),
+                ),
+                const SizedBox(height: 22),
                 const Text(
                   'Welcome back',
                   style: TextStyle(
@@ -65,26 +80,76 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 30),
                 _LoginInput(
-                  controller: _emailController,
-                  label: 'E-mail address',
-                  icon: Icons.alternate_email,
-                  keyboardType: TextInputType.emailAddress,
+                  controller: _usePhone ? _phoneController : _emailController,
+                  label: _usePhone ? 'Phone number' : 'E-mail address',
+                  icon: _usePhone ? Icons.phone_rounded : Icons.alternate_email,
+                  keyboardType: _usePhone
+                      ? TextInputType.phone
+                      : TextInputType.emailAddress,
                   validator: (value) {
-                    if (value == null || !value.contains('@')) {
+                    if (value == null || value.trim().isEmpty) {
+                      return _usePhone
+                          ? 'Enter your phone number'
+                          : 'Enter your email address';
+                    }
+                    if (!_usePhone && !value.contains('@')) {
                       return 'Enter a valid email address';
                     }
                     return null;
                   },
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () => setState(() => _usePhone = !_usePhone),
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.button,
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Text(
+                      _usePhone
+                          ? 'Login with email'
+                          : 'Login with phone number',
+                      style: const TextStyle(
+                        fontSize: 10,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 _LoginInput(
                   controller: _passwordController,
                   label: 'Password',
                   icon: Icons.key_rounded,
-                  obscureText: true,
+                  obscureText: _obscurePassword,
+                  suffixIcon: IconButton(
+                    onPressed: () => setState(
+                      () => _obscurePassword = !_obscurePassword,
+                    ),
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_rounded
+                          : Icons.visibility_off_rounded,
+                    ),
+                  ),
                   validator: (value) => value == null || value.isEmpty
                       ? 'Enter your password'
                       : null,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed('/forgot-password'),
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.primary,
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                    ),
+                    child: const Text('Forgot password?'),
+                  ),
                 ),
                 const SizedBox(height: 24),
                 SizedBox(
@@ -138,6 +203,7 @@ class _LoginInput extends StatelessWidget {
     required this.icon,
     this.keyboardType,
     this.obscureText = false,
+    this.suffixIcon,
     this.validator,
   });
 
@@ -146,6 +212,7 @@ class _LoginInput extends StatelessWidget {
   final IconData icon;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final Widget? suffixIcon;
   final String? Function(String?)? validator;
 
   @override
@@ -158,6 +225,7 @@ class _LoginInput extends StatelessWidget {
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon, color: AppColors.primary),
+        suffixIcon: suffixIcon,
         filled: true,
         fillColor: const Color(0xFFF8F8F8),
         border: OutlineInputBorder(

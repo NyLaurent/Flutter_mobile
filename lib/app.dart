@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'screens/login_page.dart';
+import 'screens/forgot_password_page.dart';
 import 'screens/onboarding_page.dart';
 import 'screens/signup_page.dart';
 import 'screens/splash_page.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         '/onboarding': (context) => const OnboardingPage(),
         '/signup': (context) => const SignupPage(),
         '/login': (context) => const LoginPage(),
+        '/forgot-password': (context) => const ForgotPasswordPage(),
       },
     );
   }
