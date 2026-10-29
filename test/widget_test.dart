@@ -62,6 +62,17 @@ void main() {
 
     await tester.tap(find.text('Next'));
     await tester.pump();
-    expect(find.text("You're all set!"), findsOneWidget);
+    await tester.pumpAndSettle();
+    expect(find.text('Create an account'), findsOneWidget);
+    expect(find.text('Full Name'), findsOneWidget);
+    expect(find.text('E-mail address'), findsOneWidget);
+
+    await tester.tap(find.text('Login'));
+    await tester.pumpAndSettle();
+    expect(find.text('Welcome back'), findsOneWidget);
+
+    await tester.tap(find.text('Create account'));
+    await tester.pumpAndSettle();
+    expect(find.text('Create an account'), findsOneWidget);
   });
 }

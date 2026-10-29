@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'screens/login_page.dart';
 import 'screens/onboarding_page.dart';
+import 'screens/signup_page.dart';
 import 'screens/splash_page.dart';
 import 'theme/app_colors.dart';
 
@@ -40,6 +42,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashPage(),
         '/onboarding': (context) => const OnboardingPage(),
+        '/signup': (context) => const SignupPage(),
+        '/login': (context) => const LoginPage(),
       },
     );
   }

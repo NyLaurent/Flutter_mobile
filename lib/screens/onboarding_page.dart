@@ -49,9 +49,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       return;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("You're all set!")),
-    );
+    Navigator.of(context).pushReplacementNamed('/signup');
   }
 
   void _previousPage() {
