@@ -52,13 +52,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
     Navigator.of(context).pushReplacementNamed('/signup');
   }
 
-  void _previousPage() {
-    if (_currentPage > 0) {
-      _pageController.previousPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    }
+  void _skipOnboarding() {
+    Navigator.of(context).pushReplacementNamed('/signup');
   }
 
   @override
@@ -146,19 +141,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   children: [
                     SizedBox(
                       width: 120,
-                      child: OutlinedButton(
-                        onPressed: _currentPage == 0 ? null : _previousPage,
-                        style: OutlinedButton.styleFrom(
+                      child: TextButton(
+                        onPressed: _skipOnboarding,
+                        style: TextButton.styleFrom(
                           foregroundColor: AppColors.primary,
-                          side: BorderSide(
-                            color: _currentPage == 0
-                                ? AppColors.primary.withOpacity(0.2)
-                                : AppColors.primary,
-                          ),
-                          shape: const StadiumBorder(),
                         ),
                         child: const Text(
-                          'Prev',
+                          'Skip',
                           style: TextStyle(fontWeight: FontWeight.w600),
                         ),
                       ),

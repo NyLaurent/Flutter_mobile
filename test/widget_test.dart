@@ -38,18 +38,14 @@ void main() {
       'Montserrat',
     );
 
-    expect(find.text('Prev'), findsOneWidget);
+    expect(find.text('Skip'), findsOneWidget);
     expect(find.text('Next'), findsOneWidget);
 
-    await tester.tap(find.text('Prev'));
-    await tester.pumpAndSettle();
-    expect(find.text('Scan QR to see menu instantly'), findsOneWidget);
-
-    await tester.tap(find.text('Next'));
+    await tester.drag(find.byType(PageView), const Offset(-500, 0));
     await tester.pumpAndSettle();
     expect(find.text('Order & track your meal easily'), findsOneWidget);
 
-    await tester.tap(find.text('Prev'));
+    await tester.drag(find.byType(PageView), const Offset(500, 0));
     await tester.pumpAndSettle();
     expect(find.text('Scan QR to see menu instantly'), findsOneWidget);
 
@@ -101,6 +97,19 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Create account'));
     await tester.pumpAndSettle();
+    expect(find.text('Create an account'), findsOneWidget);
+  });
+
+  testWidgets('skip on onboarding goes directly to signup', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MyApp());
+    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Skip'));
+    await tester.pumpAndSettle();
+
     expect(find.text('Create an account'), findsOneWidget);
   });
 }
