@@ -141,10 +141,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   children: [
                     SizedBox(
                       width: 120,
-                      child: TextButton(
+                      child: OutlinedButton(
                         onPressed: _skipOnboarding,
-                        style: TextButton.styleFrom(
+                        style: OutlinedButton.styleFrom(
                           foregroundColor: AppColors.primary,
+                          side: BorderSide(
+                            color: AppColors.primary.withOpacity(0.25),
+                          ),
+                          shape: const StadiumBorder(),
                         ),
                         child: const Text(
                           'Skip',
